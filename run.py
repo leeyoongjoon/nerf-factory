@@ -10,6 +10,10 @@ import os
 import shutil
 from typing import *
 
+
+#os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
+#os.environ["CUDA_VISIBLE_DEVICES"] = "5"
+
 import gin
 import torch
 from pytorch_lightning import Trainer
@@ -21,6 +25,7 @@ from pytorch_lightning.callbacks import (
     TQDMProgressBar,
 )
 from pytorch_lightning.plugins import DDPPlugin
+from pytorch_lightning.strategies import DDPStrategy
 
 from utils.select_option import select_callback, select_dataset, select_model
 
@@ -133,7 +138,7 @@ def run(
     callbacks += [model_checkpoint, tqdm_progrss]
     callbacks += select_callback(model_name)
 
-    ddp_plugin = DDPPlugin(find_unused_parameters=False) if num_devices > 1 else None
+    ddp_plugin = DDPStrategy(find_unused_parameters=False) if num_devices > 1 else None
 
     trainer = Trainer(
         logger=logger if run_train else None,
@@ -217,7 +222,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--scene_name", type=str, default=None, help="scene name to render"
     )
-    parser.add_argument("--seed", type=int, default=220901, help="seed to use")
+    parser.add_argument("--seed", type=int, default=230426, help="seed to use")
     args = parser.parse_args()
 
     ginbs = []

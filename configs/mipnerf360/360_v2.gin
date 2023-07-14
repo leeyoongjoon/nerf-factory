@@ -9,7 +9,7 @@ LitData.batch_sampler = "all_images"
 
 run.model_name = "mipnerf360"
 run.max_steps = 1000000
-run.log_every_n_steps = 100
+run.log_every_n_steps = 1000
 
 LitData.load_radii = True
 LitData.batch_size = 4096
@@ -17,6 +17,7 @@ LitData.chunk = 4096
 LitData.use_pixel_centers = True
 LitData.epoch_size = 250000
 
+LitData.num_workers = 64
 
 LitDataNeRF360V2.near = 0.1
 LitDataNeRF360V2.far = 1e6

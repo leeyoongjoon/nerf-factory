@@ -16,6 +16,7 @@ LitData.batch_size = 4096
 LitData.chunk = 8192
 LitData.use_pixel_centers = True
 LitData.epoch_size = 250000
+LitData.num_workers = 512
 
 MipNeRF.density_noise = 1.
 LitDataNeRF360V2.cam_scale_factor = 0.125
